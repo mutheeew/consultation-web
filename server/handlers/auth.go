@@ -46,11 +46,11 @@ func (h *handlerAuth) Register(c echo.Context) error {
 		Username: request.Username,
 		Email:    request.Email,
 		Password: passwordHash,
-		Role:     request.Role,
-		Gender:   request.Gender,
-		Phone:    request.Phone,
-		Address:  request.Address,
-		Photo:    path_file + "uploads/profile.png",
+		// Role:     request.Role,
+		// Gender:   request.Gender,
+		// Phone:    request.Phone,
+		// Address:  request.Address,
+		Photo: path_file + "uploads/profile.png",
 	}
 
 	newUser, err := h.AuthRepository.Register(dataUser)
@@ -99,11 +99,11 @@ func (h *handlerAuth) Login(c echo.Context) error {
 		FullName: userLogin.FullName,
 		Username: userLogin.Username,
 		Email:    userLogin.Email,
-		Role:     userLogin.Role,
-		Gender:   userLogin.Gender,
-		Phone:    userLogin.Phone,
-		Address:  userLogin.Address,
-		Token:    token,
+		// Role:     userLogin.Role,
+		// Gender:   userLogin.Gender,
+		// Phone:    userLogin.Phone,
+		// Address:  userLogin.Address,
+		Token: token,
 	}
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: loginResponse})
@@ -137,10 +137,10 @@ func responseCheckAuth(u models.User) resp {
 		FullName: u.FullName,
 		Username: u.Username,
 		Email:    u.Email,
-		Role:     u.Role,
-		Gender:   u.Gender,
-		Phone:    u.Phone,
-		Address:  u.Address,
-		Photo:    u.Photo,
+		// Role:     u.Role,
+		// Gender:   u.Gender,
+		// Phone:    u.Phone,
+		// Address:  u.Address,
+		// Photo:    u.Photo,
 	}
 }

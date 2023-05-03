@@ -5,13 +5,13 @@ import {API} from "../../config/api"
 
 export default function SignUp({signup, closeSignUp}){
     const [form, setForm] = useState({
-        full_name:"",
-        Username:"",
-        Email:"",
-        Password:"",
+        fullName: '',
+        username: '',
+        email: '',
+        password: '',
     });
 
-    const {full_name, Username, Email, Password} = form
+    const {fullName, username, email, password} = form
 
     const handleOnChange = (e) => {
         // setState here
@@ -27,10 +27,10 @@ export default function SignUp({signup, closeSignUp}){
           console.log("register success : ", response)
           alert("Register Sukses")
           setForm({
-            full_name:"",
-            Username:"",
-            Email:"",
-            Password:"",
+            fullName:"",
+            username:"",
+            email:"",
+            password:"",
           });
         } catch (error) {
           console.log("register failed : ", error);
@@ -44,32 +44,32 @@ export default function SignUp({signup, closeSignUp}){
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control type="input" 
-                        name="full_name"
-                        value={full_name}
+                        name="fullName"
+                        value={fullName}
                         onChange={handleOnChange}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label>username</Form.Label>
                     <Form.Control type="input" 
-                        name="Username"
-                        value={Username}
+                        name="username"
+                        value={username}
                         onChange={handleOnChange}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>email address</Form.Label>
                     <Form.Control type="email" 
-                        name="Email"
-                        value={Email}
+                        name="email"
+                        value={email}
                         onChange={handleOnChange}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>password</Form.Label>
                     <Form.Control type="password"
-                        name="Password"
-                        value={Password}
+                        name="password"
+                        value={password}
                         onChange={handleOnChange}
                     />
                 </Form.Group>
