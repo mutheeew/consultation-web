@@ -50,7 +50,7 @@ func (h *handlerAuth) Register(c echo.Context) error {
 		// Gender:   request.Gender,
 		// Phone:    request.Phone,
 		// Address:  request.Address,
-		Photo: path_file + "uploads/profile.png",
+		// Photo: path_file + "uploads/profile.png",
 	}
 
 	newUser, err := h.AuthRepository.Register(dataUser)
@@ -85,7 +85,7 @@ func (h *handlerAuth) Login(c echo.Context) error {
 
 	claims := jwt.MapClaims{}
 	claims["id"] = userLogin.ID
-	claims["role"] = userLogin.Role
+	// claims["role"] = userLogin.Role
 	claims["exp"] = time.Now().Add(time.Hour * 4).Unix() // 4 hours expired
 
 	token, generateTokenErr := jwtToken.GenerateToken(&claims)
