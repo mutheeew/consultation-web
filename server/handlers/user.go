@@ -17,6 +17,15 @@ func HandlerUser(UserRepository repositories.UserRepository) *handlerUser {
 	return &handlerUser{UserRepository}
 }
 
+func (h *handlerUser) FindUsers(c echo.Context) error {
+	users, err := h.UserRepository.FindUsers()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: users})
+}
+
 func (h *handlerUser) GetUser(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 

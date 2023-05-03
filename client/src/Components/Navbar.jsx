@@ -11,7 +11,7 @@ export default function Navbar(){
     }
     return(
         <>
-        <Button>Login</Button>
+        <Button variant="danger">Login</Button>
         <SignUp
             signup={signup}
             closeSignUp={closeSignUp}
