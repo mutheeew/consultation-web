@@ -15,7 +15,7 @@ const reducer = (state, action) => {
     case "USER_SUCCESS":
     case "LOGIN_SUCCESS":
       // Set localstorage item with key "token" here ...
-      localStorage.setItem(`token`, payload.Token);
+      localStorage.setItem(`Token`, payload.Token);
       return {
         isLogin: true,
         user: payload,
@@ -24,7 +24,7 @@ const reducer = (state, action) => {
     case "AUTH_ERROR":
     case "LOGOUT":
       // Remove localstorage item with key "token" here ...
-      localStorage.removeItem(`token`);
+      localStorage.removeItem(`Token`);
       return {
         isLogin: false,
         user: {},

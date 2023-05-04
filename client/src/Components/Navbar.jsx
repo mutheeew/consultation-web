@@ -5,8 +5,10 @@ import SignUp from "./Modals/SignUp"
 import SignIn from "./Modals/SignIn"
 import Logo from "../assets/Icon.png"
 import Group from "../assets/Group.png"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Navbars(){
+  let navigate = useNavigate()
   const [state, dispatch] = useContext(UserContext)
     const [signup, setSignUp] = useState(false)
     const [signin, setSignIn] = useState(false)
@@ -26,9 +28,14 @@ export default function Navbars(){
     const closeSignUp = () => {
         setSignUp(false)
     }
+
+    const logout = () => {
+      dispatch({type: "LOGOUT"})
+      navigate("/");
+    };
     return(
         <>
-        <Navbar>
+        <Navbar className="shadow-lg">
             <Container className="d-flex justify-content-between">
                 <NavbarBrand><img src={Logo}></img></NavbarBrand>
                 {state.isLogin ?
@@ -40,16 +47,16 @@ export default function Navbars(){
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="bg-light mt-4 ms-4">
                       <Dropdown.Item className="d-flex align-items-center fw-semibold">
-                        {/* <Link
+                        <Link
                           to="/profile"
-                          className="text-white fw-semibold text-decoration-none">
-                          <CgProfile
+                          className="fw-semibold text-decoration-none">
+                          {/* <CgProfile
                             color="red"
                             style={{ fontSize: "20px" }}
                             className="me-2"
                           /> */}
                           Profile
-                        {/* </Link> */}
+                        </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="d-flex align-items-center gap-2 fw-semibold fs-6 pb-2 border-bottom border-white">
                         {/* <Link
@@ -65,6 +72,7 @@ export default function Navbars(){
                       </Dropdown.Item>
                       <Dropdown.Item
                         className="d-flex align-items-center gap-2 fw-semibold"
+                        onClick={()=> logout()}
                         >
                         {/* <MdLogout color="red" style={{ fontSize: "20px" }} /> */}
                         Logout

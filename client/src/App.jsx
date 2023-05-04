@@ -2,8 +2,10 @@ import { useState, useContext, useEffect } from 'react'
 import { UserContext } from './Context/User'
 import Navbars from './Components/Navbar'
 import Home from './Pages/Home'
+import Profil from './Pages/User/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import {API, setAuthToken} from './config/api'
+import { PrivateRouteLogin, PrivateRouteUser } from './Components/privateroute'
 
 function App() {
   let navigate = useNavigate();
@@ -14,8 +16,8 @@ function App() {
     try {
       const response = await API.get('/check-auth');
       console.log("check user success: ", response)
-      let payload = response.data.data;
-      payload.token = localStorage.token;
+      let payload = response.data.Data;
+      payload.Token = localStorage.Token;
       dispatch({
         type : 'USER_SUCCESS',
         payload,
@@ -31,8 +33,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
+    if (localStorage.Token) {
+      setAuthToken(localStorage.Token);
       checkUser();
     } else {
       setIsLoading(false)
@@ -54,6 +56,11 @@ function App() {
     <Navbars/>
     <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route element={<PrivateRouteLogin/>}>
+        <Route element={<PrivateRouteUser />}>
+          <Route path="/profile" element={<Profil />} />
+        </Route>
+      </Route>
     </Routes>
     {/* <SignUp/> */}
     </>

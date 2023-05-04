@@ -29,8 +29,7 @@ export default function SignIn({signin, closeSignIn, openSignUp}){
             type : 'LOGIN_SUCCESS',
             payload : response.data.Data,
           }); 
-          setAuthToken(localStorage.Token);
-          
+          setAuthToken(response.data.Data.Token);
           alert("Login Sukses")
         } catch (error) {
           alert("Login Failed, Try again")
