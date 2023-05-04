@@ -6,6 +6,9 @@ import Profil from './Pages/User/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import {API, setAuthToken} from './config/api'
 import { PrivateRouteLogin, PrivateRouteUser } from './Components/privateroute'
+import Reservation from './Pages/User/Reservation'
+import DetailArticle from './Pages/DetailArticle'
+import Inbox from './Pages/User/Inbox'
 
 function App() {
   let navigate = useNavigate();
@@ -56,9 +59,12 @@ function App() {
     <Navbars/>
     <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route path="/article/:id" element={<DetailArticle />} />
       <Route element={<PrivateRouteLogin/>}>
-        <Route element={<PrivateRouteUser />}>
           <Route path="/profile" element={<Profil />} />
+          <Route element={<PrivateRouteUser />}>
+            <Route path="/reservation" element={<Reservation />} />
+            <Route path='/inbox' element={<Inbox/>}/>
         </Route>
       </Route>
     </Routes>

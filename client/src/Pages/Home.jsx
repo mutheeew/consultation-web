@@ -1,8 +1,17 @@
-import CardComp from "../Components/Card";
 import Jumbotron from "../Components/Jumbotron";
 import AddArticle from "./Doctor/AddArticle";
+import { Row, Col, Card, Badge } from "react-bootstrap";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import { Link } from "react-router-dom";
 
 export default function Home(){
+
+    let { data: articles } = useQuery('articlesCache', async () => {
+        const response = await API.get('/articles');
+        return response.data.Data;
+    });
+
     return (
         
         <>
@@ -15,18 +24,26 @@ export default function Home(){
             </div>
         <div className="d-flex gap-4 flex-wrap">
 
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
-        <CardComp/>
+        <Row>
+                {articles?.length !== 0 &&
+                    articles?.map((item, index) => (
+                        <Col md={3} sm={6} xs={12} key={index}>
+                            <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Img variant="top" src={item.Attache} />
+                                    <Card.Body>
+                                        <Card.Title>{item.Title}</Card.Title>
+                                        <Card.Text>
+                                        {item.Description}
+                                        </Card.Text>
+                                        <Badge pill bg='secondary' >Corona Virus</Badge>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+                        </Col>
+                    ))
+                }
+            </Row>
         </div>
         </div>
         </>

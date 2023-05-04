@@ -13,7 +13,7 @@ func ArticleRoutes(e *echo.Group) {
 	articleRepository := repositories.RepositoryArticle(mysql.DB)
 	h := handlers.HandlerArticle(articleRepository)
 
-	e.POST("/article", middleware.Auth(middleware.UploadFile(h.CreateArticle)))
+	e.POST("/article/:id", middleware.Auth(middleware.UploadFile(h.CreateArticle)))
 	e.GET("/article/:id", h.GetArticle)
 	e.GET("/articles", h.FindArticles)
 	e.PATCH("/article/:id", middleware.Auth(middleware.UploadFile(h.UpdateArticle)))

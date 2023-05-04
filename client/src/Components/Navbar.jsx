@@ -59,16 +59,16 @@ export default function Navbars(){
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="d-flex align-items-center gap-2 fw-semibold fs-6 pb-2 border-bottom border-white">
-                        {/* <Link
-                          to="/payment"
-                          className="text-white fw-semibold text-decoration-none">
-                          <MdPayment
+                        <Link
+                          to="/inbox"
+                          className="fw-semibold text-decoration-none">
+                          {/* <MdPayment
                             color="red"
                             style={{ fontSize: "20px" }}
                             className="me-2"
                           /> */}
                           Consultation
-                        {/* </Link> */}
+                        </Link>
                       </Dropdown.Item>
                       <Dropdown.Item
                         className="d-flex align-items-center gap-2 fw-semibold"

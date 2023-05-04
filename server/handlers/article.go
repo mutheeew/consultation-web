@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	articledto "hallocorona/dto/article"
 	dto "hallocorona/dto/result"
 	"hallocorona/models"
@@ -18,7 +17,7 @@ type handlerArticle struct {
 	ArticleRepository repositories.ArticleRepository
 }
 
-var path_file = "http://localhost:5000/uploads"
+var path_file = "http://localhost:5000/"
 
 func HandlerArticle(ArticleRepository repositories.ArticleRepository) *handlerArticle {
 	return &handlerArticle{ArticleRepository}
@@ -26,7 +25,7 @@ func HandlerArticle(ArticleRepository repositories.ArticleRepository) *handlerAr
 
 func (h *handlerArticle) CreateArticle(c echo.Context) error {
 
-	id, _ := strconv.Atoi(c.FormValue("user_id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 
 	dataFile := c.Get("dataFile").(string)
 
@@ -36,7 +35,7 @@ func (h *handlerArticle) CreateArticle(c echo.Context) error {
 		Attache:     dataFile,
 		Description: c.FormValue("description"),
 	}
-	fmt.Println(dataFile)
+
 	validation := validator.New()
 	err := validation.Struct(request)
 	if err != nil {
@@ -50,14 +49,14 @@ func (h *handlerArticle) CreateArticle(c echo.Context) error {
 		Description: request.Description,
 	}
 
-	data, err := h.ArticleRepository.CreateArticle(article)
+	article, err = h.ArticleRepository.CreateArticle(article)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
 	}
 
-	// article, _ = h.ArticleRepository.GetArticle(article.ID)
+	article, _ = h.ArticleRepository.GetArticle(article.ID)
 
-	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: article})
 }
 
 func (h *handlerArticle) GetArticle(c echo.Context) error {
