@@ -1,7 +1,8 @@
-import {Button, Card} from 'react-bootstrap';
+import {Badge, Button, Card} from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { API } from '../config/api';
 import {useParams} from 'react-router-dom'
+import article1 from '../assets/article1.png'
 
 function CardComp() {
     let { id } = useParams("id")
@@ -13,13 +14,13 @@ function CardComp() {
 
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Img variant="top" src={article1} />
             <Card.Body>
                 <Card.Title>{article?.Title}</Card.Title>
                 <Card.Text>
                 {article?.Description}
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Badge pill bg='secondary' >Corona Virus</Badge>
             </Card.Body>
         </Card>
     );

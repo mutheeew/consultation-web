@@ -15,7 +15,7 @@ const reducer = (state, action) => {
     case "USER_SUCCESS":
     case "LOGIN_SUCCESS":
       // Set localstorage item with key "token" here ...
-      localStorage.setItem(`token`, payload.token);
+      localStorage.setItem(`token`, payload.Token);
       return {
         isLogin: true,
         user: payload,

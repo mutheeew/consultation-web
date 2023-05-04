@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create base URL API
 export const API = axios.create({
-  baseURL: 'https://hallo-corona.onrender.com/api/v1',
+  baseURL: 'http://localhost:5000/api/v1/',
   // baseURL: 'http://localhost:5000/api/v1/',
 });
 

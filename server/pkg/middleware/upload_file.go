@@ -10,7 +10,7 @@ import (
 
 func UploadFile(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		file, err := c.FormFile("image")
+		file, err := c.FormFile("attache")
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err)
 		}
@@ -32,8 +32,9 @@ func UploadFile(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 
 		data := tempFile.Name()
+		filename := data[8:]
 
-		c.Set("dataFile", data)
+		c.Set("dataFile", filename)
 		return next(c)
 	}
 }

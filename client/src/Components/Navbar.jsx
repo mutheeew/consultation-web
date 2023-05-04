@@ -1,8 +1,13 @@
-import React, { useState } from "react"
-import { Button } from "react-bootstrap"
+import React, { useState, useContext } from "react"
+import { Button, Container, Navbar, NavbarBrand, Dropdown } from "react-bootstrap"
+import { UserContext } from "../Context/User"
 import SignUp from "./Modals/SignUp"
 import SignIn from "./Modals/SignIn"
-export default function Navbar(){
+import Logo from "../assets/Icon.png"
+import Group from "../assets/Group.png"
+
+export default function Navbars(){
+  const [state, dispatch] = useContext(UserContext)
     const [signup, setSignUp] = useState(false)
     const [signin, setSignIn] = useState(false)
 
@@ -23,16 +28,71 @@ export default function Navbar(){
     }
     return(
         <>
-            <SignIn
-                signin={signin}
-                closeSignIn={closeSignIn}
-            />
-            <Button onClick={openSignIn}>Login</Button>
-            <SignUp
-                signup={signup}
-                closeSignUp={closeSignUp}
-            />
-            <Button onClick={openSignUp}>Register</Button>
+        <Navbar>
+            <Container className="d-flex justify-content-between">
+                <NavbarBrand><img src={Logo}></img></NavbarBrand>
+                {state.isLogin ?
+                <div>
+                {/* <Nav className="gap-3"> */}
+                  <Dropdown>
+                    <Dropdown.Toggle className="btn-light" style={{backgroundColor:"white"}} >
+                      <img src={Group} className="rounded-50" style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> 
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="bg-light mt-4 ms-4">
+                      <Dropdown.Item className="d-flex align-items-center fw-semibold">
+                        {/* <Link
+                          to="/profile"
+                          className="text-white fw-semibold text-decoration-none">
+                          <CgProfile
+                            color="red"
+                            style={{ fontSize: "20px" }}
+                            className="me-2"
+                          /> */}
+                          Profile
+                        {/* </Link> */}
+                      </Dropdown.Item>
+                      <Dropdown.Item className="d-flex align-items-center gap-2 fw-semibold fs-6 pb-2 border-bottom border-white">
+                        {/* <Link
+                          to="/payment"
+                          className="text-white fw-semibold text-decoration-none">
+                          <MdPayment
+                            color="red"
+                            style={{ fontSize: "20px" }}
+                            className="me-2"
+                          /> */}
+                          Consultation
+                        {/* </Link> */}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        className="d-flex align-items-center gap-2 fw-semibold"
+                        >
+                        {/* <MdLogout color="red" style={{ fontSize: "20px" }} /> */}
+                        Logout
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                {/* </Nav> */}
+                </div>
+                :
+                <div className="d-flex gap-3">
+                    <SignUp
+                        signup={signup}
+                        closeSignUp={closeSignUp}
+                        openSignIn={openSignIn}
+                        />
+                    <Button onClick={openSignUp} style={{backgroundColor:"#FFF", borderColor:"#FF6185", color:"#FF6185"}}>Sign up</Button>
+                    <SignIn
+                        signin={signin}
+                        closeSignIn={closeSignIn}
+                        openSignUp={openSignUp}
+                        />
+                    <Button onClick={openSignIn} style={{backgroundColor:"#FF6185", borderColor:"#FF6185"}}>Sign in</Button>
+                </div>
+                      }
+            </Container>
+            
+        </Navbar>
+            
         </>
     )
 }

@@ -22,22 +22,23 @@ func HandlerConsultation(ConsultationRepository repositories.ConsultationReposit
 }
 
 func (h *handlerConsultation) CreateConsultation(c echo.Context) error {
+	request := new(consultationdto.ConsultationRequest)
 	userLogin := c.Get("userLogin")
 	userId := userLogin.(jwt.MapClaims)["id"].(float64)
 
-	convAge, _ := strconv.Atoi(c.FormValue("age"))
-	convHeight, _ := strconv.Atoi(c.FormValue("height"))
-	convWeight, _ := strconv.Atoi(c.FormValue("weight"))
-	request := consultationdto.ConsultationRequest{
-		UserId:      int(userId),
-		BornDate:    c.FormValue("bornDate"),
-		Age:         convAge,
-		Height:      convHeight,
-		Weight:      convWeight,
-		Subject:     c.FormValue("subject"),
-		RequestDate: c.FormValue("requestDate"),
-		Description: c.FormValue("description"),
-	}
+	// convAge, _ := strconv.Atoi(c.FormValue("age"))
+	// convHeight, _ := strconv.Atoi(c.FormValue("height"))
+	// convWeight, _ := strconv.Atoi(c.FormValue("weight"))
+	// // request := consultationdto.ConsultationRequest{
+	// // 	UserId:      int(userId),
+	// // 	BornDate:    c.FormValue("bornDate"),
+	// // 	Age:         convAge,
+	// // 	Height:      convHeight,
+	// // 	Weight:      convWeight,
+	// // 	Subject:     c.FormValue("subject"),
+	// // 	RequestDate: c.FormValue("requestDate"),
+	// // 	Description: c.FormValue("description"),
+	// }
 
 	validation := validator.New()
 	err := validation.Struct(request)
@@ -46,7 +47,7 @@ func (h *handlerConsultation) CreateConsultation(c echo.Context) error {
 	}
 
 	consultation := models.Consultation{
-		UserId:      request.UserId,
+		UserId:      int(userId),
 		BornDate:    request.BornDate,
 		Age:         request.Age,
 		Height:      request.Height,

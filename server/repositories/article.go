@@ -20,7 +20,7 @@ func RepositoryArticle(db *gorm.DB) *repository {
 }
 
 func (repo *repository) CreateArticle(article models.Article) (models.Article, error) {
-	err := repo.db.Create(&article).Error
+	err := repo.db.Preload("User").Create(&article).Error
 	return article, err
 }
 
