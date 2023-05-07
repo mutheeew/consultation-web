@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react"
 import { Button, Container, Navbar, NavbarBrand, Dropdown } from "react-bootstrap"
 import { UserContext } from "../Context/User"
-import SignUp from "./Modals/SignUp"
-import SignIn from "./Modals/SignIn"
+import SignUp from "./Auth/SignUp"
+import SignIn from "./Auth/SignIn"
 import Logo from "../assets/Icon.png"
 import Group from "../assets/Group.png"
 import { Link, useNavigate } from "react-router-dom"
@@ -37,7 +37,7 @@ export default function Navbars(){
         <>
         <Navbar className="shadow-lg">
             <Container className="d-flex justify-content-between">
-                <NavbarBrand><img src={Logo}></img></NavbarBrand>
+                <Link to="/"><img src={Logo}></img></Link>
                 {state.isLogin ?
                 <div>
                 {/* <Nav className="gap-3"> */}
@@ -58,25 +58,52 @@ export default function Navbars(){
                           Profile
                         </Link>
                       </Dropdown.Item>
-                      <Dropdown.Item className="d-flex align-items-center gap-2 fw-semibold fs-6 pb-2 border-bottom border-white">
-                        <Link
-                          to="/inbox"
-                          className="fw-semibold text-decoration-none">
-                          {/* <MdPayment
-                            color="red"
-                            style={{ fontSize: "20px" }}
-                            className="me-2"
-                          /> */}
-                          Consultation
-                        </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        className="d-flex align-items-center gap-2 fw-semibold"
-                        onClick={()=> logout()}
-                        >
-                        {/* <MdLogout color="red" style={{ fontSize: "20px" }} /> */}
-                        Logout
-                      </Dropdown.Item>
+                      {state.isLogin && state.user.Role==="Doctor" && (
+                        <>
+                          <Dropdown.Item className="d-flex align-items-center gap-2 fw-semibold fs-6 pb-2 border-bottom border-white">
+                          <Link
+                            to="/add-article"
+                            className="fw-semibold text-decoration-none">
+                            {/* <MdPayment
+                              color="red"
+                              style={{ fontSize: "20px" }}
+                              className="me-2"
+                            /> */}
+                            Add Article
+                          </Link>
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            className="d-flex align-items-center gap-2 fw-semibold"
+                            onClick={()=> logout()}
+                            >
+                            {/* <MdLogout color="red" style={{ fontSize: "20px" }} /> */}
+                            Logout
+                          </Dropdown.Item>
+                        </>
+                      )}
+                      {state.isLogin && state.user.Role==="User" && (
+                        <>
+                          <Dropdown.Item className="d-flex align-items-center gap-2 fw-semibold fs-6 pb-2 border-bottom border-white">
+                            <Link
+                              to="/inbox"
+                              className="fw-semibold text-decoration-none">
+                              {/* <MdPayment
+                                color="red"
+                                style={{ fontSize: "20px" }}
+                                className="me-2"
+                              /> */}
+                              Consultation
+                            </Link>
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            className="d-flex align-items-center gap-2 fw-semibold"
+                            onClick={()=> logout()}
+                            >
+                            {/* <MdLogout color="red" style={{ fontSize: "20px" }} /> */}
+                            Logout
+                          </Dropdown.Item>
+                        </>
+                      )}
                     </Dropdown.Menu>
                   </Dropdown>
                 {/* </Nav> */}

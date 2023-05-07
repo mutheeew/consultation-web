@@ -3,14 +3,17 @@ import {Modal, Form, Button} from "react-bootstrap"
 import {useMutation} from "react-query"
 import {API, setAuthToken} from "../../config/api"
 import { UserContext } from "../../Context/User";
+import { useNavigate } from "react-router-dom";
+
 
 export default function SignIn({signin, closeSignIn, openSignUp}){
-    const [_, dispatch] = useContext(UserContext);
+  let navigate = useNavigate()
+    const [state, dispatch] = useContext(UserContext);
     const [form, setForm] = useState({
         username : "",
         password : "",
       });
-    
+    console.log("mute blom keramas", state)
       const { username, password} = form;
     
       const handleOnChange = (e) => {
@@ -31,6 +34,10 @@ export default function SignIn({signin, closeSignIn, openSignUp}){
           }); 
           setAuthToken(response.data.Data.Token);
           alert("Login Sukses")
+          if (response.data.Data.Role === 'Doctor'){
+            navigate('/data-reservation');
+          }
+
         } catch (error) {
           alert("Login Failed, Try again")
           console.log("login failed : ", error);

@@ -4,7 +4,7 @@ import { UserContext } from "../Context/User";
 
 export const PrivateRouteLogin = () => {
     const [userState] = useContext(UserContext);
-  console.log('mute gak mandi : ', userState.user.role)
+  console.log('mute gak mandi : ', userState.user.Role)
     if (!userState.isLogin) {
       return <Navigate to={'/'} />;
     }
@@ -15,16 +15,16 @@ export const PrivateRouteLogin = () => {
   export const PrivateRouteUser = () => {
     const [userState] = useContext(UserContext);
   
-    if (userState.user.role === 'admin') {
-      return <Navigate to={'/home'} />;
+    if (userState.user.Role === 'Doctor') {
+      return <Navigate to={'/data-reservation'} />;
     }
     return <Outlet />;
   };
   
-  export const PrivateRouteAdmin = () => {
+  export const PrivateRouteDokter = () => {
     const [userState] = useContext(UserContext);
   
-    if (userState.user.role !== 'admin') {
+    if (userState.user.Role !== 'Doctor') {
       return <Navigate to={'/'} />;
     }
     return <Outlet />;

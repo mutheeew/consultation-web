@@ -3,9 +3,13 @@ import AddArticle from "./Doctor/AddArticle";
 import { Row, Col, Card, Badge } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { API } from "../config/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../Context/User";
 
 export default function Home(){
+    let navigate = useNavigate()
+    const [state] = useContext(UserContext);
 
     let { data: articles } = useQuery('articlesCache', async () => {
         const response = await API.get('/articles');
@@ -33,8 +37,8 @@ export default function Home(){
                                     <Card.Img variant="top" src={item.Attache} />
                                     <Card.Body>
                                         <Card.Title>{item.Title}</Card.Title>
-                                        <Card.Text>
-                                        {item.Description}
+                                        <Card.Text style={{height: "100px", overflow:"hidden"}}>
+                                        {item.Description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit aliquam molestiae quia minima consectetur iste corrupti sint, deleniti sit eius perferendis architecto sunt, laboriosam culpa libero cum, asperiores eum earum. Eos doloribus quas dolor eius.
                                         </Card.Text>
                                         <Badge pill bg='secondary' >Corona Virus</Badge>
                                     </Card.Body>

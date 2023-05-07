@@ -5,10 +5,14 @@ import Home from './Pages/Home'
 import Profil from './Pages/User/Profile'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import {API, setAuthToken} from './config/api'
-import { PrivateRouteLogin, PrivateRouteUser } from './Components/privateroute'
+import { PrivateRouteDokter, PrivateRouteLogin, PrivateRouteUser } from './Components/privateroute'
 import Reservation from './Pages/User/Reservation'
 import DetailArticle from './Pages/DetailArticle'
 import Inbox from './Pages/User/Inbox'
+import AddArticle from './Pages/Doctor/AddArticle'
+import Reservations from './Pages/Doctor/Reservations'
+import DetailInfo from './Components/Doctor/DetailInfo'
+import ReservasiData from './Pages/Doctor/ReservasiData'
 
 function App() {
   let navigate = useNavigate();
@@ -61,10 +65,15 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/article/:id" element={<DetailArticle />} />
       <Route element={<PrivateRouteLogin/>}>
-          <Route path="/profile" element={<Profil />} />
-          <Route element={<PrivateRouteUser />}>
-            <Route path="/reservation" element={<Reservation />} />
-            <Route path='/inbox' element={<Inbox/>}/>
+        <Route path="/profile" element={<Profil />} />
+        <Route element={<PrivateRouteUser />}>
+          <Route path="/reservation" element={<Reservation />} />
+          <Route path='/inbox' element={<Inbox/>}/>
+        </Route>
+        <Route element={<PrivateRouteDokter />}>
+          <Route path="/add-article" element={<AddArticle />} />
+          <Route path="/data-reservation" element={<ReservasiData />} />
+          <Route path="/detail-info" element={<DetailInfo/>}/>
         </Route>
       </Route>
     </Routes>
