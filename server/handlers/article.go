@@ -17,7 +17,7 @@ type handlerArticle struct {
 	ArticleRepository repositories.ArticleRepository
 }
 
-var path_file = "http://localhost:5000/"
+var path_file = "https://dashboard.render.com/"
 
 func HandlerArticle(ArticleRepository repositories.ArticleRepository) *handlerArticle {
 	return &handlerArticle{ArticleRepository}
