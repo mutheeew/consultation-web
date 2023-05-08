@@ -5,6 +5,7 @@ import (
 	"hallocorona/database"
 	"hallocorona/pkg/mysql"
 	"hallocorona/routes"
+	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -41,7 +42,11 @@ func main() {
 	//set static folder
 	e.Static("/uploads", "./uploads")
 
+	var PORT = os.Getenv("PORT")
+
 	//running server
-	fmt.Println("server running localhost:5000")
-	e.Logger.Fatal(e.Start("localhost:5000"))
+	// fmt.Println("server running localhost:5000")
+	// e.Logger.Fatal(e.Start("localhost:5000"))
+	fmt.Println("server running localhost: " + PORT)
+	e.Logger.Fatal(e.Start(":" + PORT))
 }
