@@ -22,15 +22,23 @@ type handlerArticle struct {
 	ArticleRepository repositories.ArticleRepository
 }
 
+// Kode tersebut adalah definisi dari sebuah tipe data (struct) dengan nama "handlerArticle". Struct ini memiliki satu properti yaitu "ArticleRepository" yang bertipe "repositories.ArticleRepository".
+
 var path_file = "https://hallo-corona.onrender.com/"
 
 func HandlerArticle(ArticleRepository repositories.ArticleRepository) *handlerArticle {
 	return &handlerArticle{ArticleRepository}
 }
 
+// Kode tersebut adalah sebuah fungsi yang bernama "HandlerArticle". Fungsi ini memiliki satu parameter yaitu "ArticleRepository" yang bertipe "repositories.ArticleRepository". Fungsi ini mengembalikan sebuah pointer ke sebuah objek yang memiliki tipe data "handlerArticle".
+
 func (h *handlerArticle) CreateArticle(c echo.Context) error {
+	// Kode tersebut adalah sebuah fungsi dengan nama "CreateArticle" yang dimiliki oleh sebuah tipe data "handlerArticle". Fungsi tersebut menerima sebuah parameter "c" yang bertipe "echo.Context" dan mengembalikan sebuah nilai bertipe "error".
 
 	id, _ := strconv.Atoi(c.Param("id"))
+
+	// Pada kode tersebut, parameter "id" pada objek "c" (yang bertipe echo.Context) diambil nilainya melalui method Param(), lalu nilai tersebut dikonversi menjadi tipe data integer menggunakan fungsi Atoi.
+	// Hasil konversi kemudian disimpan pada variabel "id". Tanda underscore (_) digunakan untuk menampung nilai balikan kedua yang dikeluarkan oleh fungsi Atoi, yaitu sebuah error yang tidak perlu di-handle pada contoh kode tersebut.
 
 	dataFile := c.Get("dataFile").(string)
 

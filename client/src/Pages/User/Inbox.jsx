@@ -4,6 +4,7 @@ import { UserContext } from "../../Context/User";
 import { useQuery } from "react-query";
 import { API } from "../../config/api";
 import Group from "../../assets/Group.png"
+import Profil from "../../assets/Profil.png"
 
 export default function Inbox(){
     const [state] = useContext(UserContext)
@@ -21,7 +22,7 @@ export default function Inbox(){
                         <Card.Body>
                             <Row>
                                 <Col xs={1}>
-                                <img src={Group} style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> 
+                                <img src={Profil} style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> 
                                 </Col>
                                 <Col>
                                 <Row>
@@ -44,7 +45,7 @@ export default function Inbox(){
                                 item.Status === "success" ?
                                 <Row className="mx-5">
                                     <Col md={1}>
-                                        <img src={state.user.Photo} className='nav-profile-image' alt="profile" />
+                                        <img src={Group} alt="profile" />
                                     </Col>
                                     <Col md={11}>
                                         <p className="text-gray">
