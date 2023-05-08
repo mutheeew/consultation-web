@@ -36,6 +36,7 @@ export default function SignUp({signup, closeSignUp, openSignIn}){
             email:"",
             password:"",
           });
+          gotoSignIn()
         } catch (error) {
           console.log("register failed : ", error);
           alert("Register Gagal")
