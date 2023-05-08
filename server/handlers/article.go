@@ -1,13 +1,18 @@
 package handlers
 
 import (
+	"context"
+	"fmt"
 	articledto "hallocorona/dto/article"
 	dto "hallocorona/dto/result"
 	"hallocorona/models"
 	"hallocorona/repositories"
 	"net/http"
+	"os"
 	"strconv"
 
+	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/go-playground/validator/v10"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/labstack/echo/v4"
@@ -42,10 +47,22 @@ func (h *handlerArticle) CreateArticle(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
 	}
 
+	var ctx = context.Background()
+	var CLOUD_NAME = os.Getenv("CLOUD_NAME")
+	var API_KEY = os.Getenv("API_KEY")
+	var API_SECRET = os.Getenv("API_SECRET")
+
+	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
+
+	resp, err := cld.Upload.Upload(ctx, dataFile, uploader.UploadParams{Folder: "Hallo Corona"})
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 	article := models.Article{
 		UserId:      request.UserId,
 		Title:       request.Title,
-		Attache:     path_file + request.Attache,
+		Attache:     resp.SecureURL,
 		Description: request.Description,
 	}
 
