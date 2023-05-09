@@ -17,6 +17,4 @@ func ConsultationRoutes(e *echo.Group) {
 	e.GET("/consultation/:id", middleware.Auth(h.GetConsultation))
 	e.GET("/consultations/:id", h.FindMyConsultations)
 	e.GET("/consultations", h.FindConsultations)
-	e.PATCH("/consultation/:id", h.UpdateConsultation)
-	e.PATCH("/consultation-reject/:id", h.RejectCons)
 }

@@ -22,6 +22,9 @@ func HandlerConsultation(ConsultationRepository repositories.ConsultationReposit
 }
 
 func (h *handlerConsultation) CreateConsultation(c echo.Context) error {
+	// Kode di atas adalah sebuah method dengan nama "CreateConsultation" yang terdapat pada objek "handlerConsultation"
+	// (dalam hal ini, objek yang telah dibuat sebelumnya dengan nama "handlerConsultation").
+	// Method ini menerima parameter input "c" yang bertipe "echo.Context" dan mengembalikan sebuah error.
 	userLogin := c.Get("userLogin")
 	userId := userLogin.(jwt.MapClaims)["id"].(float64)
 
@@ -96,46 +99,4 @@ func (h *handlerConsultation) FindConsultations(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
 	}
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: consultations})
-}
-
-func (h *handlerConsultation) UpdateConsultation(c echo.Context) error {
-	var err error
-
-	id, _ := strconv.Atoi(c.Param("id"))
-
-	consultation, err := h.ConsultationRepository.GetConsultation(uint(id))
-
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
-	}
-
-	consultation.Status = "success"
-
-	data, err := h.ConsultationRepository.UpdateConsultation(consultation)
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
-	}
-
-	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
-}
-
-func (h *handlerConsultation) RejectCons(c echo.Context) error {
-	var err error
-
-	id, _ := strconv.Atoi(c.Param("id"))
-
-	consultation, err := h.ConsultationRepository.GetConsultation(uint(id))
-
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
-	}
-
-	consultation.Status = "reject"
-
-	data, err := h.ConsultationRepository.UpdateConsultation(consultation)
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
-	}
-
-	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
 }

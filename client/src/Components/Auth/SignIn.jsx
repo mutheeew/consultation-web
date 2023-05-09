@@ -10,44 +10,43 @@ export default function SignIn({signin, closeSignIn, openSignUp}){
   let navigate = useNavigate()
     const [state, dispatch] = useContext(UserContext);
     const [form, setForm] = useState({
-        username : "",
-        password : "",
+      username : "",
+      password : "",
+    });
+    const { username, password} = form;
+  
+    const handleOnChange = (e) => {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
       });
-    console.log("mute blom keramas", state)
-      const { username, password} = form;
-    
-      const handleOnChange = (e) => {
-        setForm({
-          ...form,
-          [e.target.name]: e.target.value,
-        });
-      };
-    
-      const handleSignIn = useMutation(async (e) => {
-        try {
-          e.preventDefault();
-          const response = await API.post('/login', form);
-          console.log("login success: ", response.data.Data);
-          dispatch({
-            type : 'LOGIN_SUCCESS',
-            payload : response.data.Data,
-          }); 
-          setAuthToken(response.data.Data.Token);
-          alert("Login Sukses")
-          if (response.data.Data.Role === 'Doctor'){
-            navigate('/data-reservation');
-          }
-
-        } catch (error) {
-          alert("Login Failed, Try again")
-          console.log("login failed : ", error);
+    };
+  
+    const handleSignIn = useMutation(async (e) => {
+      try {
+        e.preventDefault();
+        const response = await API.post('/login', form);
+        console.log("login success: ", response.data.Data);
+        dispatch({
+          type : 'LOGIN_SUCCESS',
+          payload : response.data.Data,
+        }); 
+        setAuthToken(response.data.Data.Token);
+        alert("Login Sukses")
+        if (response.data.Data.Role === 'Doctor'){
+          navigate('/data-reservation');
         }
-      });
 
-      const gotoSignUp = () => {
-        closeSignIn();
-        openSignUp();
-      };
+      } catch (error) {
+        alert("Login Failed, Try again")
+        console.log("login failed : ", error);
+      }
+    });
+
+    const gotoSignUp = () => {
+      closeSignIn();
+      openSignUp();
+    };
     
     return (
         <Modal show={signin} onHide={closeSignIn} animation={true} centered size="sm">
