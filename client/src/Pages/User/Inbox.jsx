@@ -4,7 +4,7 @@ import { UserContext } from "../../Context/User";
 import { useQuery } from "react-query";
 import { API } from "../../config/api";
 import Group from "../../assets/Group.png"
-import Profil from "../../asset/ZaynQ.png"
+import Profilzayn from "../../asset/ZaynQ.png"
 
 export default function Inbox(){
     const [state] = useContext(UserContext)
@@ -22,7 +22,7 @@ export default function Inbox(){
                         <Card.Body>
                             <Row>
                                 <Col xs={1}>
-                                <img src={Profil} style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> 
+                                <img src={Profilzayn} style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> 
                                 </Col>
                                 <Col>
                                 <Row>
