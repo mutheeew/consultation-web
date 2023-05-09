@@ -4,7 +4,7 @@ import { UserContext } from "../../Context/User";
 import { useQuery } from "react-query";
 import { API } from "../../config/api";
 import Group from "../../assets/Group.png"
-import Profilzayn from "../../asset/ZaynQ.png"
+import Profilzayn from "../../assets/ZaynQ.png"
 
 export default function Inbox(){
     const [state] = useContext(UserContext)
