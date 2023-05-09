@@ -16,7 +16,7 @@ func RepositoryResponse(db *gorm.DB) *repository {
 }
 
 func (repo *repository) CreateResponse(response models.Response) (models.Response, error) {
-	err := repo.db.Preload("User").Preload("Consultation").Create(&response).Error
+	err := repo.db.Create(&response).Error
 	return response, err
 }
 
