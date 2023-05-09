@@ -7,8 +7,8 @@ type Response struct {
 	UserId           int
 	User             UserResponse
 	ConsultationId   int
-	ResponseText     string `gorm:"type: text"`
-	ConsultationLink string `gorm:"type: text"`
+	ResponseText     string `gorm:"type: text" form:"responseText"`
+	ConsultationLink string `gorm:"type: text" form:"responseText"`
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }
