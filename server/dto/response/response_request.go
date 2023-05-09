@@ -1,6 +1,6 @@
 package responsedto
 
 type ResponseRequest struct {
-	ResponseText     string
-	ConsultationLink string
+	ResponseText     string `form:"responseText"`
+	ConsultationLink string `form:"consultationLink"`
 }
