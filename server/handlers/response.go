@@ -65,3 +65,11 @@ func (h *handlerResponse) GetResponse(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: response})
 }
+
+func (h *handlerResponse) GetAllResponses(c echo.Context) error {
+	response, err := h.ResponseRepository.GetAllResponses()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: response})
+}

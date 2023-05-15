@@ -26,12 +26,12 @@ export default function Home(){
             <div className="d-flex justify-content-center my-5">
                 <h1 style={{color:"#FF6185"}}>Artikel Hari Ini</h1>
             </div>
-        <div className="d-flex gap-4 flex-wrap">
+        <div className="d-flex flex-wrap">
 
         <Row>
                 {articles?.length !== 0 &&
                     articles?.map((item, index) => (
-                        <Col md={3} sm={6} xs={12} key={index}>
+                        <Col key={index}>
                             <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
                                 <Card style={{ width: '18rem' }}>
                                     <Card.Img variant="top" src={item.Attache} />
@@ -45,6 +45,7 @@ export default function Home(){
                                 </Card>
                             </Link>
                         </Col>
+                        
                     ))
                 }
             </Row>

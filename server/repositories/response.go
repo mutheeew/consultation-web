@@ -9,6 +9,7 @@ import (
 type ResponseRepository interface {
 	CreateResponse(response models.Response) (models.Response, error)
 	GetResponse(ID uint) (models.Response, error)
+	GetAllResponses() ([]models.Response, error)
 }
 
 func RepositoryResponse(db *gorm.DB) *repository {
@@ -23,5 +24,11 @@ func (repo *repository) CreateResponse(response models.Response) (models.Respons
 func (repo *repository) GetResponse(ID uint) (models.Response, error) {
 	var response models.Response
 	err := repo.db.Where("user_id=?", ID).Preload("User").Preload("Consultation").First(&response).Error
+	return response, err
+}
+
+func (repo *repository) GetAllResponses() ([]models.Response, error) {
+	var response []models.Response
+	err := repo.db.Find(&response).Preload("Consultations").Error
 	return response, err
 }
