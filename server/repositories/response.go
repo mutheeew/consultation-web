@@ -23,7 +23,7 @@ func (repo *repository) CreateResponse(response models.Response) (models.Respons
 
 func (repo *repository) GetResponse(ID uint) (models.Response, error) {
 	var response models.Response
-	err := repo.db.Where("user_id=?", ID).Preload("User").Preload("Consultation").First(&response).Error
+	err := repo.db.Preload("User").Preload("Consultation").First(&response).Error
 	return response, err
 }
 
