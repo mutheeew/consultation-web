@@ -9,7 +9,6 @@ import (
 	"strconv"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/golang-jwt/jwt/v4"
 	"github.com/labstack/echo/v4"
 )
 
@@ -22,10 +21,10 @@ func HandlerResponse(ResponseRepository repositories.ResponseRepository) *handle
 }
 
 func (h *handlerResponse) CreateResponse(c echo.Context) error {
-	userLogin := c.Get("userLogin")
-	idUser := userLogin.(jwt.MapClaims)["id"].(float64)
+	// userLogin := c.Get("userLogin")
+	// idUser := userLogin.(jwt.MapClaims)["id"].(float64)
 
-	consultId, _ := strconv.Atoi(c.Param("id"))
+	// consultId, _ := strconv.Atoi(c.Param("id"))
 
 	request := responsedto.ResponseRequest{
 		ResponseText:     c.FormValue("responseText"),
@@ -39,8 +38,8 @@ func (h *handlerResponse) CreateResponse(c echo.Context) error {
 	}
 
 	response := models.Response{
-		UserId:           int(idUser),
-		ConsultationId:   consultId,
+		UserId:           1,
+		ConsultationId:   1,
 		ResponseText:     request.ResponseText,
 		ConsultationLink: request.ConsultationLink,
 	}

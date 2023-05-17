@@ -37,8 +37,8 @@ export default function DetailInfo({item}){
 
             const response = await API.post('/response/' + item.ID, formData, config)
             console.log("ini response", response)
-            const consultation = await API.patch('/consultation/' + item.ID)
-            console.log("ini consultation", consultation)
+            // const consultation = await API.patch('/consultation/' + item.ID)
+            // console.log("ini consultation", consultation)
             Navigate('/reservasi-data')
         } catch (error) {
             console.log("Add response failed", error)
