@@ -9,7 +9,6 @@ import (
 type ResponseRepository interface {
 	CreateResponse(response models.Response) (models.Response, error)
 	GetResponse(ID uint) (models.Response, error)
-	GetResponseByConsul(ID uint) (models.Response, error)
 	GetAllResponses() ([]models.Response, error)
 }
 
@@ -25,12 +24,6 @@ func (repo *repository) CreateResponse(response models.Response) (models.Respons
 func (repo *repository) GetResponse(ID uint) (models.Response, error) {
 	var response models.Response
 	err := repo.db.Where("user_id=?", ID).Preload("User").Preload("Consultation").First(&response).Error
-	return response, err
-}
-
-func (repo *repository) GetResponseByConsul(ID uint) (models.Response, error) {
-	var response models.Response
-	err := repo.db.Where("consul_id = ?", ID).Preload("User").Preload("Consultations").First(&response).Error
 	return response, err
 }
 
