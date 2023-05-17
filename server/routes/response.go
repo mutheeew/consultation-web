@@ -14,5 +14,5 @@ func ResponseRoutes(e *echo.Group) {
 	h := handlers.HandlerResponse(responseRepository)
 
 	e.POST("/response/:id", middleware.Auth(h.CreateResponse))
-	e.GET("/responses/", h.GetResponse)
+	e.GET("/responses/", h.GetAllResponses)
 }
