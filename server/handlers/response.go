@@ -53,7 +53,7 @@ func (h *handlerResponse) CreateResponse(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: "err2"})
 	}
 
-	response, _ = h.ResponseRepository.GetResponse(uint(response.UserId))
+	response, _ = h.ResponseRepository.GetResponse(uint(response.ID))
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: response})
 }
