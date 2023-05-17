@@ -3,6 +3,7 @@ import {Button, Col, Form, Row} from 'react-bootstrap';
 import { UserContext } from '../../Context/User';
 import { useMutation } from 'react-query';
 import { API } from '../../config/api';
+import { useNavigate } from 'react-router-dom';
 
 function Reservation() {
     const [state] = useContext(UserContext)
@@ -26,6 +27,8 @@ function Reservation() {
         });
     }
 
+    const navigate = useNavigate()
+
     const handleSubmit = useMutation(async (e) => {
         try {
             e.preventDefault()
@@ -42,6 +45,7 @@ function Reservation() {
             const response = await API.post('/consultation', formData)
             console.log(response)
             alert("Add reservation successed ")
+            navigate("/")
         } catch (e) {
             alert("add reservation  failed : ", e);
         }

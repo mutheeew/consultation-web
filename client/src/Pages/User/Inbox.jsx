@@ -14,6 +14,11 @@ export default function Inbox(){
         const response = await API.get('/consultations/' + id);
         return response.data.Data;
     });
+
+    let { data: responses} = useQuery('responsesCache', async() => {
+        const response = await API.get('/responses')
+        return response.data.Data
+    })
     return(
         <Container className="p-5" >
             <h1 style={{color:"#FF6185", borderColor:"#FF6185"}}>Consultation</h1>
@@ -47,13 +52,16 @@ export default function Inbox(){
                                     <Col md={1}>
                                         <img src={Group} alt="profile" />
                                     </Col>
-                                    <Col md={11}>
+                                    {responses?.filter((res) => res.ConsulattionId === item.id)
+                .map((itemresponse) => (
+                                    <Col md={11} key={itemresponse.ID}>
                                         <p className="text-gray">
                                             Hi {state.user.FullName} hari ini adalah jadwal konsultasi kamu, silahkan klik link berikut untuk melakukan konsultasi secara
-                                            langsung kepada saya : <a href="https://meet.google.com/iiz-whrz-mcb" target="_blank"> disini</a> 
+                                            langsung kepada saya : <a href={itemresponse.consultationLink} target="_blank"> disini</a> 
                                         </p>
                                         <p className="text-gray">Dr. Muhammad Rizki </p>
                                     </Col>
+                ))}
                                 </Row>
                                     :
                                     <Row className="mx-5">

@@ -19,22 +19,29 @@ export default function DetailInfo({item}){
         })
     }
 
-    console.log(form)
+    console.log("ini item", item.ID)
 
     const handleSubmit = useMutation(async (e) => {
         try {
             e.preventDefault()
 
+            const config = {
+                headers: {
+                  "Content-type": "application/json",
+                },
+              };
+
             const formData = new FormData()
             formData.set("responseText", form.responseText)
             formData.set("consultationLink", form.consultationLink)
 
-            const response = await API.post('/response/' + item.ID, formData)
+            const response = await API.post('/response/' + item.ID, formData, config)
+            console.log("ini response", response)
             const consultation = await API.patch('/consultation/' + item.ID)
-            console.log ("ini consultation", consultation)
+            console.log("ini consultation", consultation)
             Navigate('/reservasi-data')
-        } catch (e) {
-            console.log("Add response failed", e)
+        } catch (error) {
+            console.log("Add response failed", error)
         }
     })
 
