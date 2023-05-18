@@ -37,8 +37,8 @@ export default function DetailInfo({item}){
 
             const response = await API.post('/response/' + item.ID, formData, config)
             console.log("ini response", response)
-            // const consultation = await API.patch('/consultation/' + item.ID)
-            // console.log("ini consultation", consultation)
+            const consultation = await API.patch('/consultation/' + item.ID)
+            console.log("ini consultation", consultation)
             Navigate('/reservasi-data')
         } catch (error) {
             console.log("Add response failed", error)
@@ -104,14 +104,15 @@ export default function DetailInfo({item}){
                     </tbody>
                 </Table>
                 <div>
+                    <input type="text" />
                 <Form  >
                     <Form.Group className="mb-3">
                         <Form.Label className="fw-semibold">Description</Form.Label>
-                        <Form.Control as="textarea" name="responseText" onChange={handleChange} rows={3} />
+                        <Form.Control type="text " name="responseText" onChange={handleChange} rows={3} />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label className="fw-semibold">Link</Form.Label>
-                        <Form.Control type="text" name="consultationLink" onChange={handleChange} />
+                        <Form.Control type="text" value="mute mandi lah pleasee" name="consultationLink" onChange={handleChange} />
                     </Form.Group>
                     <div className="d-flex justify-content-end gap-3">
                         {/* <Button>Cancel</Button> */}

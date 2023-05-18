@@ -15,6 +15,8 @@ export default function SignUp({signup, closeSignUp, openSignIn}){
         address: '',
     });
 
+    console.log(form)
+
     const {fullName, username, email, password, role, gender, phone, address} = form
 
     const handleOnChange = (e) => {

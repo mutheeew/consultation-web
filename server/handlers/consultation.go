@@ -100,3 +100,21 @@ func (h *handlerConsultation) FindConsultations(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: consultations})
 }
+
+func (h *handlerConsultation) UpdateConsultation(c echo.Context) error {
+	var err error
+	id, _ := strconv.Atoi(c.Param("id"))
+	consultation, err := h.ConsultationRepository.GetConsultation(uint(id))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	consultation.Status = "success"
+
+	data, err := h.ConsultationRepository.UpdateConsultation(consultation)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+	}
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
+}
