@@ -21,13 +21,12 @@ export default function DetailInfo({item}){
 
     console.log("ini item", item.ID)
 
-    const handleSubmit = useMutation(async (e) => {
+    const handleSubmit = useMutation(async () => {
         try {
-            e.preventDefault()
 
             const config = {
                 headers: {
-                  "Content-type": "application/json",
+                  "Content-type": "multipart/form-data",
                 },
               };
 
@@ -81,8 +80,6 @@ export default function DetailInfo({item}){
                 <Table>
                     <thead>
                         <tr>
-
-                        <th>No</th>
                         <th>Full Name</th>
                         <th>Gender</th>
                         <th>Phone</th>
@@ -93,7 +90,6 @@ export default function DetailInfo({item}){
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
                             <td>{item.User.FullName}</td>
                             <td>{item.User.Gender}</td>
                             <td>{item.User.Phone}</td>
@@ -104,19 +100,18 @@ export default function DetailInfo({item}){
                     </tbody>
                 </Table>
                 <div>
-                    <input type="text" />
                 <Form  >
                     <Form.Group className="mb-3">
                         <Form.Label className="fw-semibold">Description</Form.Label>
-                        <Form.Control type="text " name="responseText" onChange={handleChange} rows={3} />
+                        <Form.Control as="textarea" name="responseText" onChange={handleChange} style={{ height: '100px' }}/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label className="fw-semibold">Link</Form.Label>
-                        <Form.Control type="text" value="mute mandi lah pleasee" name="consultationLink" onChange={handleChange} />
+                        <Form.Control type="text" name="consultationLink" onChange={handleChange} />
                     </Form.Group>
                     <div className="d-flex justify-content-end gap-3">
                         {/* <Button>Cancel</Button> */}
-                        <Button type="submit" onClick={(e) => handleSubmit.mutate(e)}>Approve</Button>
+                        <Button type="submit" onClick={(e) => handleSubmit.mutate()}>Approve</Button>
                     </div>
                 </Form>
                 </div>

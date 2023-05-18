@@ -19,6 +19,13 @@ export default function Inbox(){
         const response = await API.get('/responses')
         return response.data.Data
     })
+    consultations?.map((item) => {
+        console.log(
+          "tesss",
+          responses?.filter((res) => res.ConsultationId === item.ID)
+        );
+      });
+
     return(
         <Container className="p-5" >
             <h1 style={{color:"#FF6185", borderColor:"#FF6185"}}>Consultation</h1>
@@ -52,16 +59,14 @@ export default function Inbox(){
                                     <Col md={1}>
                                         <img src={Group} alt="profile" />
                                     </Col>
-                                    {responses?.filter((res) => res.ConsulattionId === item.id)
-                .map((itemresponse) => (
-                                    <Col md={11} key={itemresponse.ID}>
-                                        <p className="text-gray">
-                                            Hi {state.user.FullName} hari ini adalah jadwal konsultasi kamu, silahkan klik link berikut untuk melakukan konsultasi secara
-                                            langsung kepada saya : <a href={itemresponse.consultationLink} target="_blank"> disini</a> 
-                                        </p>
-                                        <p className="text-gray">Dr. Muhammad Rizki </p>
-                                    </Col>
-                ))}
+                                    {responses?.filter((res) => res.ConsultationId === item.ID).map((itemresponse) => (
+                                        <Col md={11} key={itemresponse.ID}>
+                                            <p className="text-gray">
+                                                Hi {state.user.FullName} {itemresponse.responseText} <a href={itemresponse.consultationLink} target="_blank"> disini</a> 
+                                            </p>
+                                            <p>{itemresponse.User.FullName}</p>
+                                        </Col>
+                                    ))}
                                 </Row>
                                     :
                                     <Row className="mx-5">

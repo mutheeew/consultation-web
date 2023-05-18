@@ -65,27 +65,27 @@ function Reservation() {
                     <Form.Control value={state.user.Phone} readOnly/>
                 </Form.Group>
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formGridCity">
+                    <Form.Group as={Col}>
                         <Form.Label>Born Date</Form.Label>
                     <Form.Control type='date' name='bornDate' onChange={handleChange} />
                     </Form.Group>
 
-                    <Form.Group as={Col} md={2} controlId="formGridState">
+                    <Form.Group as={Col} md={2}>
                     <Form.Label>Age</Form.Label>
                     <Form.Control name='age' onChange={handleChange} />
                     </Form.Group>
 
-                    <Form.Group as={Col} md={2} controlId="formGridZip">
+                    <Form.Group as={Col} md={2}>
                     <Form.Label>Height</Form.Label>
                     <Form.Control name='height' onChange={handleChange} />
                     </Form.Group>
 
-                    <Form.Group as={Col} md={2} controlId="formGridZip">
+                    <Form.Group as={Col} md={2}>
                     <Form.Label>Weight</Form.Label>
                     <Form.Control name='weight' onChange={handleChange} />
                     </Form.Group>
                 </Row>
-                <Form.Group className="mb-3" controlId="formGridAddress1">
+                <Form.Group className="mb-3">
                     <Form.Label>Gender</Form.Label>
                     
                     <Form.Control type='text' value={state.user.Gender} readOnly/>
@@ -94,12 +94,12 @@ function Reservation() {
                     <Form.Label>Subject</Form.Label>
                     <Form.Control type="text" name='subject' onChange={handleChange}/>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGridAddress2">
+                <Form.Group className="mb-3">
                     <Form.Label>Live Consultation Date</Form.Label>
                     <Form.Control type='date' name='requestDate' onChange={handleChange}/>
                 </Form.Group>
                 
-                <Form.Group className="mb-3" controlId="formGridAddress2">
+                <Form.Group className="mb-3">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                     name='description'
