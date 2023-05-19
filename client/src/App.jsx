@@ -12,6 +12,7 @@ import Inbox from './Pages/User/Inbox'
 import AddArticle from './Pages/Doctor/AddArticle'
 import DetailInfo from './Components/Doctor/DetailInfo'
 import ReservasiData from './Pages/Doctor/ReservasiData'
+import UpdateArticle from './Pages/Doctor/UpdateArticle'
 
 function App() {
   let navigate = useNavigate();
@@ -71,6 +72,7 @@ function App() {
         </Route>
         <Route element={<PrivateRouteDokter />}>
           <Route path="/add-article" element={<AddArticle />} />
+          <Route path="/update-article/:id" element={<UpdateArticle/>}/>
           <Route path="/data-reservation" element={<ReservasiData />} />
           <Route path="/detail-info" element={<DetailInfo/>}/>
         </Route>

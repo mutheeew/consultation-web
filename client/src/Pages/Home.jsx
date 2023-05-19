@@ -17,46 +17,43 @@ export default function Home(){
     });
 
     return (
-        
         <>
-        <Jumbotron/>
-        <div className="m-5">
-
-        {/* <AddArticle/> */}
-            <div className="d-flex justify-content-center my-5">
-                <h1 style={{color:"#FF6185"}}>Artikel Hari Ini</h1>
+            <Jumbotron/>
+            <div className="m-5">
+                <div className="d-flex justify-content-center my-5">
+                    <h1 style={{color:"#FF6185"}}>Artikel Hari Ini</h1>
+                </div>
+                <div className="d-flex flex-wrap justify-content-center">
+                    <Row className="gap-5">
+                            {articles?.length !== 0 &&
+                                articles?.map((item, index) => (
+                                    <Col key={index}>
+                                        <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
+                                            <Card style={{ width: '18rem' }}>
+                                                <Card.Img variant="top" src={item.Attache} />
+                                                <Card.Body>
+                                                    <Card.Title style={{height: "50px", overflow:"hidden"}}>{item.Title}</Card.Title>
+                                                    <Card.Text style={{height: "100px", overflow:"hidden"}}>
+                                                    {item.Description}
+                                                    </Card.Text>
+                                                    <Badge pill bg='secondary' >Corona Virus</Badge>
+                                                    {state.isLogin && state.user.Role === 'Doctor' && (
+                                                        <>
+                                                            <Link to={"/update-article/" + item.ID} className="mx-2">Edit</Link>
+                                                            <Button>Delete</Button>
+                                                        </>
+                                                    )}
+                                                    
+                                                </Card.Body>
+                                            </Card>
+                                        </Link>
+                                    </Col>
+                                    
+                                ))
+                            }
+                    </Row>
+                </div>
             </div>
-        <div className="d-flex flex-wrap">
-            <Row>
-                    {articles?.length !== 0 &&
-                        articles?.map((item, index) => (
-                            <Col key={index}>
-                                <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
-                                    <Card style={{ width: '20rem' }}>
-                                        <Card.Img variant="top" src={item.Attache} />
-                                        <Card.Body>
-                                            <Card.Title style={{height: "50px", overflow:"hidden"}}>{item.Title}</Card.Title>
-                                            <Card.Text style={{height: "100px", overflow:"hidden"}}>
-                                            {item.Description}
-                                            </Card.Text>
-                                            <Badge pill bg='secondary' >Corona Virus</Badge>
-                                            {state.isLogin && state.user.Role === 'Doctor' && (
-                                                <>
-                                                    <Button className="mx-2">Edit</Button>
-                                                    <Button>Delete</Button>
-                                                </>
-                                            )}
-                                            
-                                        </Card.Body>
-                                    </Card>
-                                </Link>
-                            </Col>
-                            
-                        ))
-                    }
-            </Row>
-        </div>
-        </div>
         </>
     )
 }
