@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import { useMutation } from "react-query"
 import { API } from "../../config/api"
 import { UserContext } from "../../Context/User"
+import { useNavigate } from 'react-router-dom';
 export default function AddArticle(){
     const [state] = useContext(UserContext)
     const [form, setForm] = useState({
@@ -21,6 +22,7 @@ export default function AddArticle(){
         })
     }
 
+    let navigate = useNavigate()
     const handleAddArticle = useMutation(async (e) => {
         try {
             e.preventDefault()
@@ -39,6 +41,7 @@ export default function AddArticle(){
             const response = await API.post('/article/' + state.user.ID, formData, config)
             console.log("Add article berhasil: ", response)
             alert("Berhasil menambahkan article")
+            navigate("/")
         } catch (error){
             e.preventDefault()
             console.log("Add article gagal: ", error)

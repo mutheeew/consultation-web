@@ -1,6 +1,6 @@
 import Jumbotron from "../Components/Jumbotron";
 import AddArticle from "./Doctor/AddArticle";
-import { Row, Col, Card, Badge } from "react-bootstrap";
+import { Row, Col, Card, Badge, Button } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { API } from "../config/api";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,27 +27,33 @@ export default function Home(){
                 <h1 style={{color:"#FF6185"}}>Artikel Hari Ini</h1>
             </div>
         <div className="d-flex flex-wrap">
-
-        <Row>
-                {articles?.length !== 0 &&
-                    articles?.map((item, index) => (
-                        <Col key={index}>
-                            <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
-                                <Card style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={item.Attache} />
-                                    <Card.Body>
-                                        <Card.Title>{item.Title}</Card.Title>
-                                        <Card.Text style={{height: "100px", overflow:"hidden"}}>
-                                        {item.Description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit aliquam molestiae quia minima consectetur iste corrupti sint, deleniti sit eius perferendis architecto sunt, laboriosam culpa libero cum, asperiores eum earum. Eos doloribus quas dolor eius.
-                                        </Card.Text>
-                                        <Badge pill bg='secondary' >Corona Virus</Badge>
-                                    </Card.Body>
-                                </Card>
-                            </Link>
-                        </Col>
-                        
-                    ))
-                }
+            <Row>
+                    {articles?.length !== 0 &&
+                        articles?.map((item, index) => (
+                            <Col key={index}>
+                                <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
+                                    <Card style={{ width: '20rem' }}>
+                                        <Card.Img variant="top" src={item.Attache} />
+                                        <Card.Body>
+                                            <Card.Title style={{height: "50px", overflow:"hidden"}}>{item.Title}</Card.Title>
+                                            <Card.Text style={{height: "100px", overflow:"hidden"}}>
+                                            {item.Description}
+                                            </Card.Text>
+                                            <Badge pill bg='secondary' >Corona Virus</Badge>
+                                            {state.isLogin && state.user.Role === 'Doctor' && (
+                                                <>
+                                                    <Button className="mx-2">Edit</Button>
+                                                    <Button>Delete</Button>
+                                                </>
+                                            )}
+                                            
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
+                            </Col>
+                            
+                        ))
+                    }
             </Row>
         </div>
         </div>

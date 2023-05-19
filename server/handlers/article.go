@@ -14,6 +14,7 @@ import (
 	"github.com/cloudinary/cloudinary-go/v2"
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/go-playground/validator/v10"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/labstack/echo/v4"
 )
 
@@ -123,4 +124,56 @@ func (h *handlerArticle) FindMyArticles(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: articles})
+}
+
+func (h *handlerArticle) UpdateArticle(c echo.Context) error {
+	userLogin := c.Get("userLogin")
+	userRole := userLogin.(jwt.MapClaims)["role"].(string)
+	if userRole == "Doctor" {
+		id, err := strconv.Atoi(c.Param("id"))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+		}
+
+		dataFile := c.Get("dataFile").(string)
+
+		request := articledto.ArticleRequest{
+			Title:       c.FormValue("title"),
+			Attache:     dataFile,
+			Description: c.FormValue("description"),
+		}
+
+		validation := validator.New()
+		err = validation.Struct(request)
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+		}
+
+		article, err := h.ArticleRepository.GetArticle(uint(id))
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+		}
+
+		if request.Title != "" {
+			article.Title = request.Title
+		}
+
+		if request.Attache != "" {
+			article.Attache = path_file + request.Attache
+		}
+
+		if request.Description != "" {
+			article.Description = request.Description
+		}
+
+		articleUpdated, err := h.ArticleRepository.UpdateArticle(article)
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+		}
+
+		return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: articleUpdated})
+	}
+
+	return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: "Access denied"})
+
 }

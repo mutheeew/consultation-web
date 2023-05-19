@@ -67,14 +67,14 @@ export default function DetailInfo({item}){
                         </Col>
                         <Col xs={5}>
                             <div className="d-flex align-items-center">
-                                <BsCircle/>
+                                <BsCircle style={{color:"#FF6185"}}/>
                                 <div className="ps-3">
                                     <h4>Date of complaint</h4>
-                                    <p>{item.CreatedAt}</p>
+                                    <p>{item.CreatedAt.split("T")[0]}</p>
                                 </div>
                             </div>
                             <div className="d-flex align-items-center">
-                                <BsCircleFill/>
+                                <BsCircleFill style={{color:"#FF6185"}}/>
                                 <div className="ps-3">
                                     <h4>Live Consultation</h4>
                                     <p>{item.RequestDate}</p>
