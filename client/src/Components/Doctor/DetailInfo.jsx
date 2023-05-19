@@ -19,8 +19,6 @@ export default function DetailInfo({item}){
         })
     }
 
-    console.log("ini item", item.ID)
-
     const handleSubmit = useMutation(async () => {
         try {
 
@@ -42,15 +40,15 @@ export default function DetailInfo({item}){
         }
     })
 
-    const handleCancel = useMutation(async (id) => {
-        try{
-            consul, _ = await API.patch('/consultation-cancel' +id)
+    async function handleCancel(id) {
+        try {
+            const _ = await API.patch('/cancel-consultaion/' + id);
+            console.log("Cancel successful", const_)
             refetch()
-            console.log("Cancel successed")
-        } catch (error){
-            console.log("Cancel consultation failed", error)
+        } catch (error) {
+            console.log("Cancel failed", error)
         }
-    })
+    }
 
     return (
         <>

@@ -19,12 +19,6 @@ export default function Inbox(){
         const response = await API.get('/responses')
         return response.data.Data
     })
-    consultations?.map((item) => {
-        console.log(
-          "tesss",
-          responses?.filter((res) => res.ConsultationId === item.ID)
-        );
-      });
 
     return(
         <Container className="p-5" >
@@ -70,7 +64,7 @@ export default function Inbox(){
                                 </Row>
                                     :
                                     <Row className="mx-5">
-                                        <h4 className="text-center text-gray text-bold">Reject</h4>
+                                        <h4 className="text-center text-gray text-bold">Cancel</h4>
                                     </Row>
                             }
                         </Card.Body>

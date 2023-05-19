@@ -10,7 +10,6 @@ import Reservation from './Pages/User/Reservation'
 import DetailArticle from './Pages/DetailArticle'
 import Inbox from './Pages/User/Inbox'
 import AddArticle from './Pages/Doctor/AddArticle'
-import Reservations from './Pages/Doctor/Reservations'
 import DetailInfo from './Components/Doctor/DetailInfo'
 import ReservasiData from './Pages/Doctor/ReservasiData'
 

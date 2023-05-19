@@ -10,8 +10,8 @@ export default function ReservasiData(){
     })
 
     return(
-        <div>
-            <h1>Reservasi Data</h1>
+        <div className="m-5">
+            <h1 className="py-3" style={{color:"#FF6185"}}>Reservasi Data</h1>
             <Table>
                 <thead>
                     <tr>
@@ -32,12 +32,12 @@ export default function ReservasiData(){
                             <td>{item.RequestDate}</td>
                             {
                                 item.Status === "waiting" ?
-                                <td>Waiting...</td>
+                                <td className="text-warning">Waiting...</td>
                                 :
                                 item.Status === "success" ?
-                                <td>Approved</td>
+                                <td className="text-success">Approved</td>
                                 :
-                                <td>Cancel</td>
+                                <td className="text-danger">Cancel</td>
                             }
                             <td>
                                 <>
@@ -47,7 +47,7 @@ export default function ReservasiData(){
                                         </>
                                         :
                                         <>
-                                            Already Responsed
+                                        <p className="text-primary">Response has been given</p>
                                         </>
                                     }
                                 </>
