@@ -3,12 +3,11 @@ import AddArticle from "./Doctor/AddArticle";
 import { Row, Col, Card, Badge, Button } from "react-bootstrap";
 import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../Context/User";
 
 export default function Home(){
-    let navigate = useNavigate()
     const [state] = useContext(UserContext);
 
     let { data: articles } = useQuery('articlesCache', async () => {
@@ -16,11 +15,15 @@ export default function Home(){
         return response.data.Data;
     });
 
-    // const handleDelete = useMutation(async(id) => {
-    //     try {
-    //         await API.delete()
-    //     }
-    // })
+    const handleDelete = useMutation(async (id) => {
+        try{
+            await API.delete("/article/"+ id);
+            alert("Ddeleted")
+            
+        } catch (error){
+          console.log(error);
+        }
+      });
 
     return (
         <>
@@ -34,25 +37,26 @@ export default function Home(){
                             {articles?.length !== 0 &&
                                 articles?.map((item, index) => (
                                     <Col key={index}>
-                                        <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
                                             <Card style={{ width: '18rem' }}>
+                                        <Link to={"/article/" + item.ID} style={{ textDecoration: "none" }}>
                                                 <Card.Img variant="top" src={item.Attache} />
+                                                </Link>
                                                 <Card.Body>
                                                     <Card.Title style={{height: "50px", overflow:"hidden"}}>{item.Title}</Card.Title>
                                                     <Card.Text style={{height: "100px", overflow:"hidden"}}>
                                                     {item.Description}
                                                     </Card.Text>
+                                                    
                                                     <Badge pill bg='secondary' >Corona Virus</Badge>
                                                     {state.isLogin && state.user.Role === 'Doctor' && (
                                                         <>
                                                             <Link to={"/update-article/" + item.ID} className="mx-2">Edit</Link>
-                                                            <Button>Delete</Button>
+                                                            <Button onClick={()=> {handleDelete.mutate(item.ID)}}>Delete</Button>
                                                         </>
                                                     )}
                                                     
                                                 </Card.Body>
                                             </Card>
-                                        </Link>
                                     </Col>
                                     
                                 ))
