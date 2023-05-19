@@ -18,4 +18,5 @@ func ConsultationRoutes(e *echo.Group) {
 	e.GET("/consultations/:id", h.FindMyConsultations)
 	e.GET("/consultations", h.FindConsultations)
 	e.PATCH("/consultation/:id", h.UpdateConsultation)
+	e.PATCH("/cancel-consultaion/:id", h.CancelConsultation)
 }

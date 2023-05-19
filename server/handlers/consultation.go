@@ -93,7 +93,6 @@ func (h *handlerConsultation) FindMyConsultations(c echo.Context) error {
 }
 
 func (h *handlerConsultation) FindConsultations(c echo.Context) error {
-
 	consultations, err := h.ConsultationRepository.FindConsultations()
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
@@ -110,6 +109,25 @@ func (h *handlerConsultation) UpdateConsultation(c echo.Context) error {
 	}
 
 	consultation.Status = "success"
+
+	data, err := h.ConsultationRepository.UpdateConsultation(consultation)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+	}
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: data})
+}
+
+func (h *handlerConsultation) CancelConsultation(c echo.Context) error {
+	var err error
+	id, _ := strconv.Atoi(c.Param("id"))
+	consultation, err := h.ConsultationRepository.GetConsultation(uint(id))
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	consultation.Status = "cancel"
 
 	data, err := h.ConsultationRepository.UpdateConsultation(consultation)
 	if err != nil {

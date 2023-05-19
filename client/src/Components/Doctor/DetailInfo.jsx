@@ -35,19 +35,27 @@ export default function DetailInfo({item}){
             formData.set("consultationLink", form.consultationLink)
 
             const response = await API.post('/response/' + item.ID, formData, config)
-            console.log("ini response", response)
             const consultation = await API.patch('/consultation/' + item.ID)
-            console.log("ini consultation", consultation)
             Navigate('/reservasi-data')
         } catch (error) {
             console.log("Add response failed", error)
         }
     })
 
+    const handleCancel = useMutation(async (id) => {
+        try{
+            consul, _ = await API.patch('/consultation-cancel' +id)
+            refetch()
+            console.log("Cancel successed")
+        } catch (error){
+            console.log("Cancel consultation failed", error)
+        }
+    })
+
     return (
         <>
         <Link>
-            <button onClick={() => setShow(true)}>
+            <button onClick={() => setShow(true)} className=" btn btn-primary">
                 Give Response
             </button>
         </Link>
@@ -110,8 +118,8 @@ export default function DetailInfo({item}){
                         <Form.Control type="text" name="consultationLink" onChange={handleChange} />
                     </Form.Group>
                     <div className="d-flex justify-content-end gap-3">
-                        {/* <Button>Cancel</Button> */}
-                        <Button type="submit" onClick={(e) => handleSubmit.mutate()}>Approve</Button>
+                        <Button type="submit" className="btn-danger" onClick={() => handleCancel(item.ID)}>Cancel</Button>
+                        <Button type="submit" onClick={(e) => handleSubmit.mutate()} className="btn-success">Approve</Button>
                     </div>
                 </Form>
                 </div>

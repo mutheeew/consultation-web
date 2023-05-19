@@ -40,23 +40,17 @@ export default function ReservasiData(){
                                 <td>Cancel</td>
                             }
                             <td>
-                                <Dropdown>
-                                    <Dropdown.Toggle>
-                                        Action
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        { item.Status === "waiting" ? 
-                                            <>
-                                            <Dropdown.Item>
-                                                <DetailInfo item={item}/>
-                                            </Dropdown.Item>
-                                            </>
-                                            :
-                                            <>
-                                            </>
-                                        }
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <>
+                                    { item.Status === "waiting" ? 
+                                        <>
+                                            <DetailInfo item={item}/>
+                                        </>
+                                        :
+                                        <>
+                                            Already Responsed
+                                        </>
+                                    }
+                                </>
                             </td>
                             <td></td>
                         </tr>
