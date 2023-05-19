@@ -1,7 +1,7 @@
 import Jumbotron from "../Components/Jumbotron";
 import AddArticle from "./Doctor/AddArticle";
 import { Row, Col, Card, Badge, Button } from "react-bootstrap";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -15,6 +15,12 @@ export default function Home(){
         const response = await API.get('/articles');
         return response.data.Data;
     });
+
+    // const handleDelete = useMutation(async(id) => {
+    //     try {
+    //         await API.delete()
+    //     }
+    // })
 
     return (
         <>

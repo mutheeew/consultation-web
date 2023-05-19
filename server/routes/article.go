@@ -18,4 +18,5 @@ func ArticleRoutes(e *echo.Group) {
 	e.GET("/articles", h.FindArticles)
 	e.GET("/articles/:id", h.FindMyArticles)
 	e.PATCH("/article/:id", middleware.Auth(middleware.UploadFile(h.UpdateArticle)))
+	e.DELETE("/article/:id", middleware.Auth(h.DeleteArticle))
 }
