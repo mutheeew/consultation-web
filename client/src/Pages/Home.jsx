@@ -50,8 +50,8 @@ export default function Home(){
                                                     <Badge pill bg='secondary' >Corona Virus</Badge>
                                                     {state.isLogin && state.user.Role === 'Doctor' && (
                                                         <>
-                                                            <Link to={"/update-article/" + item.ID} className="mx-2">Edit</Link>
-                                                            <Button onClick={()=> {handleDelete.mutate(item.ID)}}>Delete</Button>
+                                                            <Link to={"/update-article/" + item.ID} className="btn btn-secondary py-0 ms-5" style={{fontSize:"12px"}}>Edit</Link>
+                                                            <Button variant="secondary" onClick={()=> {handleDelete.mutate(item.ID)}} className="py-0 ms-2" style={{fontSize:"12px"}}>Delete</Button>
                                                         </>
                                                     )}
                                                     
