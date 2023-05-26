@@ -5,6 +5,7 @@ import SignUp from "./Auth/SignUp"
 import SignIn from "./Auth/SignIn"
 import Logo from "../assets/Icon.png"
 import Group from "../assets/Group.png"
+import Puser from "../assets/profile.jpg"
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Navbars(){
@@ -42,9 +43,12 @@ export default function Navbars(){
                 <div>
                 {/* <Nav className="gap-3"> */}
                   <Dropdown>
+                  
                     <Dropdown.Toggle className="btn-light" style={{backgroundColor:"white"}} >
-                      <img src={Group} className="rounded-50" style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> 
+                    {state.isLogin && state.user.Role==="Doctor" && ( <img src={Group} className="rounded-50" style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> )}
+                      {state.isLogin && state.user.Role==="User" && ( <img src={Puser} className="rounded-50" style={{width:"45px", height:"45px", borderRadius:"100%"}} ></img> )}
                     </Dropdown.Toggle>
+                    
                     <Dropdown.Menu className="bg-light mt-4 ms-4">
                       <Dropdown.Item className="d-flex align-items-center fw-semibold">
                         <Link

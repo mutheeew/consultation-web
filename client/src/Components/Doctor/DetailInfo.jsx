@@ -117,7 +117,7 @@ export default function DetailInfo({item}){
                     </Form.Group>
                     <div className="d-flex justify-content-end gap-3">
                         <Button type="submit" className="btn-danger" onClick={() => handleCancel(item.ID)}>Cancel</Button>
-                        <Button type="submit" onClick={(e) => handleSubmit.mutate()} className="btn-success">Approve</Button>
+                        <Button type="submit" onClick={(e) => handleSubmit.mutate(e)} className="btn-success">Approve</Button>
                     </div>
                 </Form>
                 </div>
